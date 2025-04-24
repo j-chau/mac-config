@@ -1,1 +1,12 @@
-iterm2
+/*
+.DS_Store
+!/.gitignore
+
+!/bat
+!/broot
+/broot/*
+!broot/conf.hjson
+!broot/verbs.hjson
+!/colorls
+!/gh-dash
+!/zsh

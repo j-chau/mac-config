@@ -1,0 +1,105 @@
+prSections:
+- title: My Pull Requests
+  filters: is:open author:@me
+  type: null
+- title: Needs My Review
+  filters: is:open review-requested:@me
+  type: null
+- title: Involved
+  filters: is:open involves:@me -author:@me
+  type: null
+issuesSections:
+- title: My Issues
+  filters: is:open author:@me
+- title: Assigned
+  filters: is:open assignee:@me
+- title: Involved
+  filters: is:open involves:@me -author:@me
+repo:
+  branchesRefetchIntervalSeconds: 30
+  prsRefetchIntervalSeconds: 60
+defaults:
+  preview:
+    open: true
+    width: 90
+  prsLimit: 20
+  prApproveComment: LGTM
+  issuesLimit: 20
+  view: prs
+  layout:
+    prs:
+      updatedAt:
+        width: 5
+      createdAt:
+        width: 5
+      repo:
+        width: 20
+      author:
+        width: 15
+      authorIcon:
+        hidden: false
+      assignees:
+        width: 20
+        hidden: true
+      base:
+        width: 15
+        hidden: true
+      lines:
+        width: 15
+    issues:
+      updatedAt:
+        width: 5
+      createdAt:
+        width: 5
+      repo:
+        width: 15
+      creator:
+        width: 10
+      creatorIcon:
+        hidden: false
+      assignees:
+        width: 20
+        hidden: true
+  refetchIntervalMinutes: 30
+keybindings:
+  universal: []
+  issues: []
+  prs: 
+    - key: u
+      name: update pr from base branch (rebase)
+      command: gh pr update-branch {{.PrNumber}} --rebase
+    - key: m
+      name: squash merge
+      command: gh pr merge {{.PrNumber}} --squash
+  branches: []
+repoPaths: {}
+theme:
+# Catppuccin Macchiato (Rosewater)
+  colors:
+    text:
+      primary: '#cad3f5'
+      secondary: '#f4dbd6'
+      inverted: '#181926'
+      faint: '#b8c0e0'
+      warning: '#eed49f'
+      success: '#a6da95'
+      error: '#ed8796'
+    background:
+      selected: '#363a4f'
+    border:
+      primary: '#f4dbd6'
+      secondary: '#494d64'
+      faint: '#363a4f'
+    icon:
+      member: '#8bd5ca' # Teal
+      newcontributor: '#91d7e3' # Sky
+  ui:
+    sectionsShowCount: true
+    table:
+      showSeparator: true
+      compact: false
+pager:
+  diff: delta
+confirmQuit: false
+showAuthorIcons: true
+smartFilteringAtLaunch: true
