@@ -13,6 +13,6 @@ export PATH="$RUBY:$GO:$PATH"
 
 PATH=$PATH:$(ruby -e 'puts Gem.bindir')
 
-eval "$(thefuck --alias FUCK)"
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /Users/joeychau/.config/broot/launcher/bash/br
+eval $(thefuck --alias)

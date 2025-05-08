@@ -10,4 +10,6 @@
 !broot/verbs.hjson
 !/colorls
 !/gh-dash
+!/ghostty
+!/nvim
 !/zsh
