@@ -29,7 +29,7 @@ require("lazy").setup({
 	-- Configure any other settings here. See the documentation for more details.
 	rocks = { enabled = false },
 	-- colorscheme that will be used when installing plugins.
-	install = { colorscheme = { "rose-pine-moon" } },
+	install = { colorscheme = { "rose-pine" } },
 	-- automatically check for plugin updates
 	checker = { enabled = true },
 })

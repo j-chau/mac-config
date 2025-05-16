@@ -1,67 +1,86 @@
 local wk = require("which-key")
 
 vim.g.mapleader = " "
-vim.keymap.set("n", "<leader>e", vim.cmd.Ex, { desc = "Open file explorer" })
 vim.keymap.set("n", "<leader>Q", ":conf qa<CR>", { desc = "Quit all (with confirm)" })
+vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<ESC>:w<CR>", { desc = "Enter normal mode and save" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move lines up" })
 vim.keymap.set("v", "K", ":m '>-2<CR>gv=gv", { desc = "Move lines down" })
 
+vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Go to the left window" })
+vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to the right window" })
+vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to the down window" })
+vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to the up window" })
+
 vim.keymap.set(
 	"n",
-	"<leader>s",
-	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+	"<leader>/s",
+	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gcI<Left><Left><Left>]],
 	{ desc = "Search and replace" }
 )
 
--- Telescope
+-- Snacks
 wk.add({
-	{ "<leader>p", group = "File search" },
+	{ "<leader>f", group = "File search" },
+	{ "<leader>s", group = "Help / History" },
+	{ "<leader>/", group = "Search options" },
 })
-
-local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>pf", builtin.find_files, { desc = "Telescope find files" })
-vim.keymap.set("n", "<leader>ps", builtin.live_grep, { desc = "Telescope search files" })
-vim.keymap.set("n", "<C-p>", builtin.git_files, { desc = "Telescope find git files only" })
 
 -- Neotree
 vim.keymap.set("n", "<C-n>", ":Neotree<CR>")
 
 -- LSPs
+wk.add({
+	{ "<leader>c", group = "Code actions" },
+})
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Displays hover information" })
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to definition" })
 vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "View code actions" })
 
-vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, { desc = "Format code" })
+vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format code" })
+
+-- Harpoon
+local harpoon = require("harpoon")
+harpoon:setup()
+wk.add({
+	{ "<leader>b", group = "Buffers (Harpoon)" },
+})
+
+-- stylua: ignore start
+vim.keymap.set("n", "<leader>ba", function() harpoon:list():add() end, { desc = "Add buffer to list" })
+vim.keymap.set("n", "<leader>bl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
+  { desc = "View buffer list" })
+vim.keymap.set("n", "<leader>bn", function() harpoon:list():next() end, { desc = "Go to next buffer" })
+vim.keymap.set("n", "<leader>bp", function() harpoon:list():prev() end, { desc = "Go to previous buffer" })
+-- stylua: ignore end
 
 -- Gitsigns
 wk.add({
-	{ "<leader>h", group = "Gitsigns" },
-	{ "<leader>ht", group = "Gitsigns toggles" },
+	{ "<leader>g", group = "Gitsigns" },
+	{ "<leader>gt", group = "Gitsigns toggles" },
 })
 
 local gitsigns = require("gitsigns")
-vim.keymap.set("n", "<leader>hs", gitsigns.stage_hunk, { desc = "Stage hunk" })
-vim.keymap.set("n", "<leader>hr", gitsigns.reset_hunk, { desc = "Reset hunk" })
+vim.keymap.set("n", "<leader>gs", gitsigns.stage_hunk, { desc = "Stage hunk" })
+vim.keymap.set("n", "<leader>gr", gitsigns.reset_hunk, { desc = "Reset hunk" })
 
-vim.keymap.set("v", "<leader>hs", function()
+vim.keymap.set("v", "<leader>gs", function()
 	gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
 end, { desc = "Stage hunk" })
 
-vim.keymap.set("v", "<leader>hr", function()
+vim.keymap.set("v", "<leader>gr", function()
 	gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 end, { desc = "Reset hunk" })
 
-vim.keymap.set("n", "<leader>hS", gitsigns.stage_buffer, { desc = "Stage buffer" })
-vim.keymap.set("n", "<leader>hR", gitsigns.reset_buffer, { desc = "Reset buffer" })
-vim.keymap.set("n", "<leader>hp", gitsigns.preview_hunk, { desc = "Preview hunk" })
-vim.keymap.set("n", "<leader>hi", gitsigns.preview_hunk_inline, { desc = "Preview hunk inline" })
+vim.keymap.set("n", "<leader>gS", gitsigns.stage_buffer, { desc = "Stage buffer" })
+vim.keymap.set("n", "<leader>gR", gitsigns.reset_buffer, { desc = "Reset buffer" })
+vim.keymap.set("n", "<leader>gp", gitsigns.preview_hunk, { desc = "Preview hunk" })
+vim.keymap.set("n", "<leader>gi", gitsigns.preview_hunk_inline, { desc = "Preview hunk inline" })
 
-vim.keymap.set("n", "<leader>hb", function()
+vim.keymap.set("n", "<leader>gb", function()
 	gitsigns.blame_line({ full = true })
 end, { desc = "Git blame" })
 
-vim.keymap.set("n", "<leader>hd", gitsigns.diffthis, { desc = "Show diff" })
+vim.keymap.set("n", "<leader>gd", gitsigns.diffthis, { desc = "Show diff" })
 
-vim.keymap.set("n", "<leader>htb", gitsigns.toggle_current_line_blame, { desc = "Toggle git blame (inline)" })
-vim.keymap.set("n", "<leader>htw", gitsigns.toggle_word_diff, { desc = "Toggle word diff" })
+vim.keymap.set("n", "<leader>gtb", gitsigns.toggle_current_line_blame, { desc = "Toggle git blame (inline)" })
+vim.keymap.set("n", "<leader>gtw", gitsigns.toggle_word_diff, { desc = "Toggle word diff" })

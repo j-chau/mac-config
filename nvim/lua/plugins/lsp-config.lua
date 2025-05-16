@@ -5,22 +5,33 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
     },
-    opts = {
-      inlay_hints = { enabled = true },
-    },
     config = function()
       require("mason").setup()
       require("mason-lspconfig").setup({
         ensure_installed = { "lua_ls", "gopls", "ts_ls" },
       })
 
-      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+      local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-      local lspconfig = require("lspconfig")
-      vim.lsp.enable("lua_ls")
-      lspconfig.ts_ls.setup({
+      vim.lsp.config("lua_ls", {
         capabilities = capabilities,
       })
+
+      vim.lsp.config("gopls", {
+        capabilities = capabilities,
+      })
+
+      vim.lsp.config("ts_ls", {
+        capabilities = capabilities,
+        init_options = {
+          preferences = {
+            importModuleSpecifier = "project-relative",
+            importModuleSpecifierPreference = "relative",
+          },
+        },
+      })
+
+      vim.lsp.enable("lua_ls", "ts_ls", "gopls")
     end,
   },
 }

@@ -9,12 +9,21 @@ vim.opt.shiftwidth = 2
 
 vim.opt.number = true
 
-vim.opt.hlsearch = false
+vim.opt.linebreak = true
+
+-- vim.opt.hlsearch = false
 vim.opt.incsearch = true
 
 vim.opt.scrolloff = 8
 
 -- vim.api.nvim_set_hl(0, "Normal", { bg = "none"})
 
-vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
+vim.diagnostic.config({
+	signs = {
+		text = signs,
+	},
+	virtual_text = true,
+	virtual_lines = false,
+	underline = true,
+})
 vim.opt.termguicolors = true
