@@ -12,6 +12,10 @@ vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Go to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Go to the down window" })
 vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Go to the up window" })
 
+vim.keymap.set("v", "<leader>c", '"+y', { desc = "Copy to clipboard" })
+vim.keymap.set("v", "<leader>v", '"+P', { desc = "Paste from clipboard" })
+vim.keymap.set("v", "<leader>x", '"+d', { desc = "Cut to clipboard" })
+
 vim.keymap.set(
 	"n",
 	"<leader>/s",
@@ -34,23 +38,37 @@ wk.add({
 	{ "<leader>c", group = "Code actions" },
 })
 vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Displays hover information" })
-vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "View code actions" })
+vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "View code actions" })
 
 vim.keymap.set("n", "<leader>cf", vim.lsp.buf.format, { desc = "Format code" })
 
 -- Harpoon
 local harpoon = require("harpoon")
-harpoon:setup()
+harpoon:setup({
+	settings = {
+		save_on_toggle = true,
+	},
+})
+
 wk.add({
-	{ "<leader>b", group = "Buffers (Harpoon)" },
+	{ "<leader>b", group = "Buffers" },
 })
 
 -- stylua: ignore start
 vim.keymap.set("n", "<leader>ba", function() harpoon:list():add() end, { desc = "Add buffer to list" })
-vim.keymap.set("n", "<leader>bl", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end,
-  { desc = "View buffer list" })
+vim.keymap.set("n", "<leader>bl",
+  function()
+    harpoon.ui:toggle_quick_menu(harpoon:list(),
+      { border = "rounded", title_pos = "center", title = " Harpoon " })
+  end,
+  { desc = "View saved buffer list" })
+vim.keymap.set("n", "<leader>bL", function() Snacks.picker.buffers() end, { desc = "View all buffer list" })
 vim.keymap.set("n", "<leader>bn", function() harpoon:list():next() end, { desc = "Go to next buffer" })
 vim.keymap.set("n", "<leader>bp", function() harpoon:list():prev() end, { desc = "Go to previous buffer" })
+vim.keymap.set("n", "<leader>b1", function() harpoon:list():select(1) end, { desc = "Go to buffer #1" })
+vim.keymap.set("n", "<leader>b2", function() harpoon:list():select(2) end, { desc = "Go to buffer #2" })
+vim.keymap.set("n", "<leader>b3", function() harpoon:list():select(3) end, { desc = "Go to buffer #3" })
+vim.keymap.set("n", "<leader>b4", function() harpoon:list():select(4) end, { desc = "Go to buffer #4" })
 -- stylua: ignore end
 
 -- Gitsigns
