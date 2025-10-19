@@ -11,5 +11,8 @@
 !/colorls
 !/gh-dash
 !/ghostty
+!/lazygit
 !/nvim
+!/tmux
+/tmux/plugins
 !/zsh

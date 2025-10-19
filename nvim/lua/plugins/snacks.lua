@@ -57,7 +57,7 @@ return {
 								{ " Config", width = 27, hl = "special" },
 								{ "c", hl = "key" },
 							},
-							indent = 4,
+							indent = 3,
 							action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
 							key = "c",
 						},
@@ -131,6 +131,14 @@ return {
 					},
 				},
 			},
+			matchers = {
+				frecency = true,
+			},
+			formatters = {
+				file = {
+					truncate = 65,
+				},
+			},
 		},
 		notifier = { enabled = true, timeout = 5000 },
 		quickfile = { enabled = true },
@@ -141,19 +149,21 @@ return {
 	},
 	keys = {
     --stylua: ignore start
-    { "<leader>ff", function() Snacks.picker.files() end,                                   desc = "Find Files" },
-    { "<leader>fb", function() Snacks.picker.buffers() end,                                 desc = "Find Buffers" },
-    { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
-    { "<leader>fg", function() Snacks.picker.git_files() end,                               desc = "Find Git Files" },
-    { "<leader>//", function() Snacks.picker.grep() end,                                    desc = "Search (grep)" },
-    { "<leader>fr", function() Snacks.picker.recent() end,                                  desc = "Recent Files" },
+    { "<leader>ff", function() Snacks.picker.files({ hidden = true, ignored = true, exclude = { "node_modules" } }) end, desc = "Find Files" },
+    { "<leader>fb", function() Snacks.picker.buffers() end,                                                              desc = "Find Buffers" },
+    { "<leader>fc", function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end,                              desc = "Find Config File" },
+    { "<leader>fg", function() Snacks.picker.git_diff() end,                                                             desc = "Find Git Files" },
+    { "<leader>fr", function() Snacks.picker.recent() end,                                                               desc = "Recent Files" },
     -- { "<leader>fp", function() Snacks.picker.projects() end,                                desc = "Projects" }, -- requires fdfind
-    { "<leader>gg", function() Snacks.lazygit() end,                                        desc = "Lazygit" },
-    { "<leader>sh", function() Snacks.picker.help() end,                                    desc = "Help Pages" },
-    { "<leader>sc", function() Snacks.picker.command_history() end,                         desc = "Command History" },
-    { "<leader>sn", function() Snacks.notifier.show_history() end,                          desc = "Notification History" },
-    { "gd",         function() Snacks.picker.lsp_definitions() end,                         desc = "Go to Definition" },
-    { "gI",         function() Snacks.picker.lsp_implementations() end,                     desc = "Go to Implementation" },
+    { "<leader>//", function() Snacks.picker.grep() end,                                                                 desc = "Search (grep)" },
+    { "<leader>/f", function() Snacks.picker.grep({ dirs = { "frontend" } }) end,                                        desc = "Search Frontend Files Only" },
+    { "<leader>/w", function() Snacks.picker.grep_word() end,                                                            desc = "Search visual selection or word", mode = { "n", "x" } },
+    { "<leader>gg", function() Snacks.lazygit() end,                                                                     desc = "Lazygit" },
+    { "<leader>sh", function() Snacks.picker.help() end,                                                                 desc = "Help Pages" },
+    { "<leader>sc", function() Snacks.picker.command_history() end,                                                      desc = "Command History" },
+    { "<leader>sn", function() Snacks.notifier.show_history() end,                                                       desc = "Notification History" },
+    { "gd",         function() Snacks.picker.lsp_definitions() end,                                                      desc = "Go to Definition" },
+    { "gI",         function() Snacks.picker.lsp_implementations() end,                                                  desc = "Go to Implementation" },
 		--stylua: ignore end
 	},
 }

@@ -2,9 +2,6 @@ return {
 	"rose-pine/neovim",
 	name = "rose-pine",
 	opts = {
-		styles = {
-			italic = false,
-		},
 		palette = {
 			main = {
 				base = "#232136",

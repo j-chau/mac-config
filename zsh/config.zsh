@@ -12,6 +12,7 @@ GO="$HOME/go/bin:"
 export PATH="$RUBY:$GO:$PATH"
 
 PATH=$PATH:$(ruby -e 'puts Gem.bindir')
+export XDG_CONFIG_HOME="$HOME/.config"
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /Users/joeychau/.config/broot/launcher/bash/br

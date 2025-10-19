@@ -1,3 +1,13 @@
+-- Highlight yanked text
+local highlight_yank = vim.api.nvim_create_augroup("highlight_yank", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	pattern = "*",
+	callback = function()
+		vim.highlight.on_yank({ higroup = "NoiceFormatProgressDone", timeout = 100 })
+	end,
+	group = highlight_yank,
+})
+
 -- Show warning when opening generated files
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	pattern = "*",

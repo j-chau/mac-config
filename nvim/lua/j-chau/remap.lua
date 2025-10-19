@@ -2,6 +2,7 @@ local wk = require("which-key")
 
 vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>Q", ":conf qa<CR>", { desc = "Quit all (with confirm)" })
+vim.keymap.set("i", "jk", "<ESC>", { desc = "Exit insert mode" })
 vim.keymap.set({ "n", "i", "v" }, "<C-s>", "<ESC>:w<CR>", { desc = "Enter normal mode and save" })
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move lines up" })
@@ -32,6 +33,7 @@ wk.add({
 
 -- Neotree
 vim.keymap.set("n", "<C-n>", ":Neotree<CR>")
+vim.keymap.set("n", "<leader>n", ":Neotree reveal<CR>", { desc = "Reveal current file in Neotree" })
 
 -- LSPs
 wk.add({
