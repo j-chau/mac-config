@@ -13,4 +13,13 @@ return {
 			require("ts_context_commentstring").setup({ enable_autocmd = false })
 		end,
 	},
+	{
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {
+			highlight = {
+				pattern = [[.*<(KEYWORDS)\s*]],
+			},
+		},
+	},
 }

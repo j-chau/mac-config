@@ -16,4 +16,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /Users/joeychau/.config/broot/launcher/bash/br
-eval $(thefuck --alias)
+source <(fzf --zsh)
+eval "$(zoxide init zsh)"
+eval "$(thefuck --alias)"

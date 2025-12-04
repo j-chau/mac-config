@@ -155,9 +155,11 @@ return {
     { "<leader>fg", function() Snacks.picker.git_diff() end,                                                             desc = "Find Git Files" },
     { "<leader>fr", function() Snacks.picker.recent() end,                                                               desc = "Recent Files" },
     -- { "<leader>fp", function() Snacks.picker.projects() end,                                desc = "Projects" }, -- requires fdfind
+    { "<leader>bl", function() Snacks.picker.buffers() end,                                                              desc = "View all buffer list" },
     { "<leader>//", function() Snacks.picker.grep() end,                                                                 desc = "Search (grep)" },
+    { "<leader>/h", function() Snacks.picker.grep({ hidden = true, ignored = true, exclude = { "node_modules" } }) end,  desc = "Search All Files (include hidden files)" },
     { "<leader>/f", function() Snacks.picker.grep({ dirs = { "frontend" } }) end,                                        desc = "Search Frontend Files Only" },
-    { "<leader>/w", function() Snacks.picker.grep_word() end,                                                            desc = "Search visual selection or word", mode = { "n", "x" } },
+    { "<leader>/w", function() Snacks.picker.grep_word() end,                                                            desc = "Search visual selection or word",        mode = { "n", "x" } },
     { "<leader>gg", function() Snacks.lazygit() end,                                                                     desc = "Lazygit" },
     { "<leader>sh", function() Snacks.picker.help() end,                                                                 desc = "Help Pages" },
     { "<leader>sc", function() Snacks.picker.command_history() end,                                                      desc = "Command History" },
