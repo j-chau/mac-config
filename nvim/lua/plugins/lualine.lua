@@ -55,7 +55,7 @@ return {
 				{ "filetype", fmt = custom_filetype },
 			},
 			lualine_y = {
-				{ "lsp_status", icon = "", ignore_lsp = { "null-ls", "copilot" }, separator = "" },
+				{ "lsp_status", icon = "", ignore_lsp = { "copilot" }, separator = "" },
 				{ "copilot" },
 			},
 			lualine_z = {

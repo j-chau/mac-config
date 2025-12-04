@@ -8,6 +8,23 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = highlight_yank,
 })
 
+-- Format on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function(args)
+		require("conform").format({ bufnr = args.buf })
+	end,
+})
+
+-- Lint on buffer write, read, and leaving insert mode
+local lint_augroup = vim.api.nvim_create_augroup("nvim-lint", { clear = true })
+vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+	callback = function()
+		require("lint").try_lint()
+	end,
+	group = lint_augroup,
+})
+
 -- Show warning when opening generated files
 vim.api.nvim_create_autocmd("BufWinEnter", {
 	pattern = "*",
