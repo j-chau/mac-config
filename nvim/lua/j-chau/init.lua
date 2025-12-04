@@ -12,7 +12,7 @@ vim.opt.shiftwidth = 2
 
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.api.nvim_set_hl(0, "LineNr", { fg = "#31748f" })      -- rose-pine pine
+vim.api.nvim_set_hl(0, "LineNr", { fg = "#31748f" }) -- rose-pine pine
 vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#6e6a86" }) -- rose-pine muted
 vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#6e6a86" }) -- rose-pine muted
 
@@ -30,17 +30,17 @@ vim.opt.termguicolors = true
 vim.opt.showmode = false -- hide mode in status line (for lualine)
 
 vim.diagnostic.config({
-  signs = {
-    text = {
-      [vim.diagnostic.severity.ERROR] = " ",
-      [vim.diagnostic.severity.WARN] = " ",
-      [vim.diagnostic.severity.HINT] = " ",
-      [vim.diagnostic.severity.INFO] = " ",
-    },
-  },
-  virtual_text = true,
-  virtual_lines = false,
-  underline = true,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = " ",
+			[vim.diagnostic.severity.WARN] = " ",
+			[vim.diagnostic.severity.HINT] = " ",
+			[vim.diagnostic.severity.INFO] = " ",
+		},
+	},
+	virtual_text = true,
+	virtual_lines = false,
+	underline = true,
 })
 
 -- Customize the LSP hover handler

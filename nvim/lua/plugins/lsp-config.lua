@@ -47,7 +47,17 @@ return {
 				},
 			})
 
-			vim.lsp.enable("lua_ls", "ts_ls", "graphql", "gopls", "bazelrc_lsp", "tflint", "terraformls", "copilot")
+			vim.lsp.enable(
+				"lua_ls",
+				"ts_ls",
+				"stylelint-lsp",
+				"graphql",
+				"gopls",
+				"bazelrc_lsp",
+				"tflint",
+				"terraformls",
+				"copilot"
+			)
 		end,
 	},
 }
