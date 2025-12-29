@@ -3,7 +3,9 @@
 !/.gitignore
 !/README.md
 
+!/aerospace
 !/bat
+!/borders
 !/broot
 /broot/*
 !broot/conf.hjson
@@ -13,6 +15,7 @@
 !/ghostty
 !/lazygit
 !/nvim
+!/sketchybar
 !/tmux
 /tmux/plugins
 !/zsh
