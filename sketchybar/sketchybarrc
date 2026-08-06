@@ -13,7 +13,7 @@ ITEM_DIR="$CONFIG_DIR/items"
 # If you are looking for other colors, see the color picker:
 # https://felixkratz.github.io/SketchyBar/config/tricks#color-picker
 
-sketchybar --bar position=top notch_display_height=30 blur_radius=0 color=0x00000000 y_offset=1
+sketchybar --bar position=top height=30 notch_display_height=30 blur_radius=0 color=0x00000000 y_offset=2
 
 ##### Changing Defaults #####
 # We now change some default values, which are applied to all further items.
@@ -23,9 +23,9 @@ sketchybar --bar position=top notch_display_height=30 blur_radius=0 color=0x0000
 default=(
   padding_left=5
   padding_right=5
-  icon.font="MesloLGS NF"
+  icon.font="MesloLGS Nerd Font:Regular:12.0"
   icon.font.size=12
-  label.font="MesloLGS NF:Bold:12.0"
+  label.font="MesloLGS Nerd Font:Bold:12.0"
   icon.color=0xffffffff
   label.color=0xffffffff
   icon.padding_left=4
@@ -40,14 +40,16 @@ sketchybar --add event aerospace_workspace_change
 for sid in $(aerospace list-workspaces --all); do
     sketchybar --add item space.$sid left \
         --subscribe space.$sid aerospace_workspace_change \
-        --set space.$sid \
-        background.color=0x44ffffff \
-        background.corner_radius=5 \
-        background.height=20 \
-        background.drawing=off \
-        label="$sid" \
-        click_script="aerospace workspace $sid" \
-        script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+        --set space.$sid background.color=0x52beb4ff \
+                         background.corner_radius=15 \
+                         background.height=20 \
+                         background.drawing=off \
+                         label="$sid" \
+                         label.padding_left=7 label.padding_right=7 \
+                         label.drawing=on \
+                         icon.drawing=off \
+                         click_script="aerospace workspace $sid" \
+                         script="$CONFIG_DIR/plugins/aerospace.sh $sid"
 done
 
 ##### Adding Left Items #####
@@ -55,18 +57,34 @@ done
 # only the properties deviating from the current defaults need to be set
 
 sketchybar --add item chevron left \
-           --set chevron icon= label.drawing=off \
+           --set chevron icon="" icon.padding_left=6 icon.color=0xffbcd9ff label.drawing=off \
            --add item front_app left \
            --set front_app icon.drawing=off script="$PLUGIN_DIR/front_app.sh" \
+                           background.color=0x52beb4ff \
+                           background.corner_radius=15 \
+                           background.height=20 \
+                           label.padding_left=9 label.padding_right=8 \
+                           label.y_offset=1 \
+                           background.drawing=on \
            --subscribe front_app front_app_switched
 
-sketchybar --add bracket left_pill_bg front_app \
-           --set left_pill_bg background.color=0x40000000 \
-                              background.corner_radius=20 \
-                              background.height=26 \
-                              background.padding_left=0 \
-                              background.padding_right=3 \
-                              blur_radius=20 \
+# sketchybar --add item front_app \
+#            --set left_pill_bg \ 
+#                               # background.color=0x40000000 \
+#                               background.corner_radius=20 \
+#                               background.height=26 \
+#                               background.padding_left=0 \
+#                               background.padding_right=3 \
+#                               blur_radius=20 \
+
+sketchybar --add bracket left_pill_bg space.1 space.2 space.3 space.4 space.5 space.6 space.7 space.8 space.9 chevron front_app \
+           --set left_pill_bg background.color=0x00000000 \
+                              background.border_color=0xffd9d0ff \
+                              background.border_width=1 \
+                              background.padding_left=-6 \
+                              background.corner_radius=15 \
+                              background.height=28 \
+                              background.drawing=on \
 
 ##### Adding Right Items #####
 # In the same way as the left items we can add items to the right side.
@@ -79,17 +97,25 @@ sketchybar --add bracket left_pill_bg front_app \
 # volume is registered. More info about the event system can be found here:
 # https://felixkratz.github.io/SketchyBar/config/events
 
+sketchybar --default background.color=0x52beb4ff \
+                     background.corner_radius=15 \
+                     background.height=20 \
+                     background.drawing=on \
+
 source $ITEM_DIR/clock.sh
 source $ITEM_DIR/volume.sh
 source $ITEM_DIR/battery.sh
 
 sketchybar --add bracket right_pill_bg clock volume battery \
-           --set right_pill_bg background.color=0x40000000 \
-                               background.corner_radius=20 \
-                               background.height=26 \
-                               background.padding_left=8 \
-                               background.padding_right=0 \
-                               blur_radius=20 \
+           --set right_pill_bg background.color=0x00000000 \
+                               background.border_color=0xffd9d0ff \
+                               background.border_width=1 \
+                               background.corner_radius=15 \
+                               background.height=28 \
+                               background.drawing=on \
+           --set clock icon.padding_left=8 label.padding_right=8 \
+           --set volume icon.padding_left=8 label.padding_right=8 \
+           --set battery icon.padding_left=8 label.padding_right=8
 
 # sketchybar --add bracket right_pill_bg_2 volume battery \
 #            --set right_pill_bg_2 background.color=0x40000000 \
